@@ -1,6 +1,9 @@
 <template>
-  <q-layout view="lHh Lpr lFf">
-    <q-header elevated>
+  <q-layout view="fHh Lpr lFf">
+    <q-header
+      elevated
+      class="bg-indigo-6 text-white"
+    >
       <q-toolbar>
         <q-btn
           flat
@@ -11,18 +14,20 @@
           @click="toggleLeftDrawer"
         />
 
-        <q-toolbar-title>
-          Quasar App
+        <q-toolbar-title class="text-center text-weight-bold">
+          English grammar test
         </q-toolbar-title>
 
-        <div>Quasar v{{ $q.version }}</div>
+        <div>
+
+        </div>
       </q-toolbar>
     </q-header>
 
     <q-drawer
       v-model="leftDrawerOpen"
       show-if-above
-      bordered
+      elevated
     >
       <q-list>
         <q-item-label
@@ -31,11 +36,11 @@
           Essential Links
         </q-item-label>
 
-        <EssentialLink
-          v-for="link in essentialLinks"
-          :key="link.title"
-          v-bind="link"
-        />
+<!--        <EssentialLink-->
+<!--          v-for="link in essentialLinks"-->
+<!--          :key="link.title"-->
+<!--          v-bind="link"-->
+<!--        />-->
       </q-list>
     </q-drawer>
 
