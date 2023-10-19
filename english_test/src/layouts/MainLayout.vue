@@ -13,8 +13,8 @@
           aria-label="Menu"
           @click="toggleLeftDrawer"
         />
-
-        <q-toolbar-title class="text-center text-weight-bold">
+        <div class="text-h6 q-ml-lg-xs">Home</div>
+        <q-toolbar-title class="text-center absolute-center text-weight-bold">
           English grammar test
         </q-toolbar-title>
 
