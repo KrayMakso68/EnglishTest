@@ -1,21 +1,21 @@
 <template>
   <q-page class="flex flex-center">
-    <div class="row">
-      <div class="col">
-        <q-card class="my-card" flat bordered>
+    <div class="row justify-evenly">
+      <div class="col-5">
+        <q-card class="my-card" bordered>
           <q-card-section horizontal>
             <q-card-section class="q-pt-xs">
-              <div class="text-overline">Overline</div>
-              <div class="text-h5 q-mt-sm q-mb-xs">Title</div>
+              <div class="text-h5 q-mt-sm q-mb-xs">Тренировка</div>
+              <q-separator />
               <div class="text-caption text-grey">
-                Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
+                 Вы можете проверить свои знания и попрактиковаться в решении задания без оценки и ограничения времени на решение
               </div>
             </q-card-section>
 
-            <q-card-section class="col-5 flex flex-center">
+            <q-card-section class="col-6 flex flex-center">
               <q-img
-                class="rounded-borders"
-                src="https://cdn.quasar.dev/img/parallax2.jpg"
+                class="rounded-borders card-img"
+                src="src/assets/img-streamlinehq-team-brainstorming-work.svg"
               />
             </q-card-section>
           </q-card-section>
@@ -33,21 +33,21 @@
           </q-card-actions>
         </q-card>
       </div>
-      <div class="col">
-        <q-card class="my-card" flat bordered>
+      <div class="col-5">
+        <q-card class="my-card" bordered>
           <q-card-section horizontal>
             <q-card-section class="q-pt-xs">
-              <div class="text-overline">Overline</div>
-              <div class="text-h5 q-mt-sm q-mb-xs">Title</div>
+              <div class="text-h5 q-mt-sm q-mb-xs">Тестирование</div>
+              <q-separator />
               <div class="text-caption text-grey">
-                Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
+                Вам предлагается пройти контрольный тест с органичением времени выполнения и оценкой званий<br>Решайте внимательно!
               </div>
             </q-card-section>
 
-            <q-card-section class="col-5 flex flex-center">
+            <q-card-section class="col-6 flex flex-center card-img">
               <q-img
                 class="rounded-borders"
-                src="https://cdn.quasar.dev/img/parallax2.jpg"
+                src="src/assets/streamlinehq-education-online-exams-tests-education-os.svg"
               />
             </q-card-section>
           </q-card-section>
@@ -76,3 +76,10 @@ export default defineComponent({
   name: 'IndexPage'
 })
 </script>
+
+<style>
+.card-img {
+  height: 160px;
+  max-width: 160px;
+}
+</style>
