@@ -1,18 +1,19 @@
 <template>
   <q-page class="flex flex-center">
     <div class="row justify-evenly">
-      <div class="col-5">
+      <div class="col-5 card-col">
         <q-card class="my-card" bordered>
           <q-card-section horizontal>
             <q-card-section class="q-pt-xs">
-              <div class="text-h5 q-mt-sm q-mb-xs">Тренировка</div>
+              <div class="text-h5 text-weight-bold q-mt-sm q-mb-xs">Тренировка</div>
               <q-separator />
+              <br>
               <div class="text-caption text-grey">
                  Вы можете проверить свои знания и попрактиковаться в решении задания без оценки и ограничения времени на решение
               </div>
             </q-card-section>
 
-            <q-card-section class="col-6 flex flex-center">
+            <q-card-section horizontal class="col-6 flex flex-center ">
               <q-img
                 class="rounded-borders card-img"
                 src="src/assets/img-streamlinehq-team-brainstorming-work.svg"
@@ -37,16 +38,17 @@
         <q-card class="my-card" bordered>
           <q-card-section horizontal>
             <q-card-section class="q-pt-xs">
-              <div class="text-h5 q-mt-sm q-mb-xs">Тестирование</div>
+              <div class="text-h5 text-weight-bold q-mt-sm q-mb-xs">Тестирование</div>
               <q-separator />
+              <br>
               <div class="text-caption text-grey">
                 Вам предлагается пройти контрольный тест с органичением времени выполнения и оценкой званий<br>Решайте внимательно!
               </div>
             </q-card-section>
 
-            <q-card-section class="col-6 flex flex-center card-img">
+            <q-card-section horizontal class="col-6 flex flex-center q-pa-sm">
               <q-img
-                class="rounded-borders"
+                class="rounded-borders card-img"
                 src="src/assets/streamlinehq-education-online-exams-tests-education-os.svg"
               />
             </q-card-section>
@@ -79,7 +81,14 @@ export default defineComponent({
 
 <style>
 .card-img {
-  height: 160px;
-  max-width: 160px;
+  width: 80%;
+  height: 80%;
+  object-fit: fill;
+}
+.my-card {
+  height: 45vh;
+}
+.card-col {
+
 }
 </style>
