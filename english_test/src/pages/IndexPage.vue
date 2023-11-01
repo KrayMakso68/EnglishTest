@@ -1,9 +1,9 @@
 <template>
   <q-page class="flex flex-center">
     <div class="row justify-evenly">
-      <div class="col-5 card-col">
-        <q-card class="my-card" bordered>
-          <q-card-section horizontal>
+      <div class="col-5">
+        <q-card class="full-height" bordered>
+          <q-card-section horizontal class="main-card-text">
             <q-card-section class="q-pt-xs">
               <div class="text-h5 text-weight-bold q-mt-sm q-mb-xs">Тренировка</div>
               <q-separator />
@@ -35,8 +35,8 @@
         </q-card>
       </div>
       <div class="col-5">
-        <q-card class="my-card" bordered>
-          <q-card-section horizontal>
+        <q-card class="full-height" bordered>
+          <q-card-section horizontal class="main-card-text" >
             <q-card-section class="q-pt-xs">
               <div class="text-h5 text-weight-bold q-mt-sm q-mb-xs">Тестирование</div>
               <q-separator />
@@ -81,14 +81,12 @@ export default defineComponent({
 
 <style>
 .card-img {
-  width: 80%;
-  height: 80%;
+  width: 90%;
+  height: 90%;
   object-fit: fill;
 }
-.my-card {
-  height: 45vh;
+.main-card-text {
+  height: 80%;
 }
-.card-col {
 
-}
 </style>
