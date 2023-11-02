@@ -13,7 +13,7 @@
               </div>
             </q-card-section>
 
-            <q-card-section horizontal class="col-6 flex flex-center ">
+            <q-card-section horizontal class="col-5 flex flex-center ">
               <q-img
                 class="rounded-borders card-img"
                 src="src/assets/img-streamlinehq-team-brainstorming-work.svg"
@@ -24,12 +24,10 @@
           <q-separator />
 
           <q-card-actions>
-            <q-btn flat round icon="event" />
-            <q-btn flat>
-              7:30PM
-            </q-btn>
-            <q-btn flat color="primary">
-              Reserve
+            <q-btn push to="test" color="indigo-6 full-width">
+              <div class="text-overline text-weight-bold">
+                Начать тренировку
+              </div>
             </q-btn>
           </q-card-actions>
         </q-card>
@@ -46,7 +44,7 @@
               </div>
             </q-card-section>
 
-            <q-card-section horizontal class="col-6 flex flex-center q-pa-sm">
+            <q-card-section horizontal class="col-5 flex flex-center q-pa-sm">
               <q-img
                 class="rounded-borders card-img"
                 src="src/assets/streamlinehq-education-online-exams-tests-education-os.svg"
@@ -57,12 +55,10 @@
           <q-separator />
 
           <q-card-actions>
-            <q-btn flat round icon="event" />
-            <q-btn flat>
-              7:30PM
-            </q-btn>
-            <q-btn flat color="primary">
-              Reserve
+            <q-btn push color="deep-orange-12 full-width">
+              <div class="text-overline text-weight-bold">
+                Начать тестирование
+              </div>
             </q-btn>
           </q-card-actions>
         </q-card>
@@ -81,9 +77,10 @@ export default defineComponent({
 
 <style>
 .card-img {
-  width: 90%;
-  height: 90%;
+  max-width: 90%;
+  //height: 90%;
   object-fit: fill;
+  vertical-align: top
 }
 .main-card-text {
   height: 80%;
