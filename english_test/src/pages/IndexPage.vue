@@ -1,7 +1,7 @@
 <template>
   <q-page class="flex flex-center">
     <div class="row justify-evenly">
-      <div class="col-5">
+      <div class="col-xs-11 col-sm-10 col-md-5 q-mt-xl">
         <q-card class="full-height" bordered>
           <q-card-section horizontal class="main-card-text">
             <q-card-section class="q-pt-xs">
@@ -24,7 +24,7 @@
           <q-separator />
 
           <q-card-actions>
-            <q-btn push to="test" color="indigo-6 full-width">
+            <q-btn push to="test" color="indigo-6 full-width" class="q-mb-xl q-mt-xs">
               <div class="text-overline text-weight-bold">
                 Начать тренировку
               </div>
@@ -32,7 +32,7 @@
           </q-card-actions>
         </q-card>
       </div>
-      <div class="col-5">
+      <div class="col-xs-11 col-sm-10 col-md-5 q-mt-xl">
         <q-card class="full-height" bordered>
           <q-card-section horizontal class="main-card-text" >
             <q-card-section class="q-pt-xs">
@@ -55,7 +55,7 @@
           <q-separator />
 
           <q-card-actions>
-            <q-btn push color="deep-orange-12 full-width">
+            <q-btn push color="deep-orange-12 full-width" class="q-mb-xl q-mt-xs">
               <div class="text-overline text-weight-bold">
                 Начать тестирование
               </div>
