@@ -15,7 +15,6 @@ function createWindow () {
     icon: path.resolve(__dirname, 'icons/icon.png'), // tray icon
     width: 1000,
     height: 600,
-    autoHideMenuBar: true,
     useContentSize: true,
     webPreferences: {
       contextIsolation: true,
@@ -25,6 +24,7 @@ function createWindow () {
   })
 
   mainWindow.loadURL(process.env.APP_URL)
+  mainWindow.setMenu(null);
 
   if (process.env.DEBUGGING) {
     // if on DEV or Production with debug enabled

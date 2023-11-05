@@ -19,3 +19,22 @@
     <!-- quasar:entry-point -->
   </body>
 </html>
+
+<script>
+  document.addEventListener('mousedown', function (e) {
+    if (e.button === 3 || e.button === 4) {
+      e.preventDefault();
+    }
+  });
+
+  document.addEventListener('mouseup', function (e) {
+    if (e.button === 3 || e.button === 4) {
+      e.preventDefault();
+    }
+  });
+  // document.addEventListener('keydown', function (e) {
+  //   if (e.altKey) {
+  //     e.preventDefault();
+  //   }
+  // });
+</script>

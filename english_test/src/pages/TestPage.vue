@@ -1,6 +1,6 @@
 <template>
   <q-page class="flex flex-center">
-    hello test
+    {{ $store.state.ex.likes }}
   </q-page>
 </template>
 

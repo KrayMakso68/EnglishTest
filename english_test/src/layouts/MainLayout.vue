@@ -36,11 +36,11 @@
           Essential Links
         </q-item-label>
 
-<!--        <EssentialLink-->
-<!--          v-for="link in essentialLinks"-->
-<!--          :key="link.title"-->
-<!--          v-bind="link"-->
-<!--        />-->
+        <EssentialLink
+          v-for="link in essentialLinks"
+          :key="link.title"
+          v-bind="link"
+        />
       </q-list>
     </q-drawer>
 
@@ -56,16 +56,16 @@ import EssentialLink from 'components/EssentialLink.vue'
 
 const linksList = [
   {
-    title: 'Docs',
-    caption: 'quasar.dev',
-    icon: 'school',
-    link: 'https://quasar.dev'
+    title: 'Home',
+    caption: 'home page',
+    icon: 'home',
+    link: '/'
   },
   {
-    title: 'Github',
-    caption: 'github.com/quasarframework',
-    icon: 'code',
-    link: 'https://github.com/quasarframework'
+    title: 'Test',
+    caption: 'test page',
+    icon: 'list',
+    link: 'test'
   },
   {
     title: 'Discord Chat Channel',
