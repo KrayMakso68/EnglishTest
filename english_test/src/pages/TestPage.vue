@@ -5,29 +5,70 @@
       <div
         class="row justify-between text-center bg-light-green-2 shadow-1"
         style="border-radius: 6px; padding-top: 2px"
-        v-for="n in 10" :key="`xxx-${n}`"
+        v-for="n in 1"
+        :key="`xxx-${n}`"
       >
         <div class="col-4">
           <div class="q-ma-none text-h6 text-no-wrap">измерять величину тока</div>
         </div>
-        <div class="col-6 text-no-wrap">
-          <div class="q-gutter-xs">   <!-- контейнеры dropable -->
-            <q-chip
-              size="15px"
-              color="deep-orange-3"
-              v-for="item in items.filter()"
-              :key="`xs-${n}`"
-              style="min-width: 100px"
-              @drop="onDrop($event, 1)"
-            >
-              gg
-            </q-chip>
+        <div class="col-6">
+          <div class="q-gutter-xs q-pt-xs">   <!-- контейнеры dropable -->
+            <div class="row">
+              <div class="col bg-deep-orange-3"
+                   style="min-height: 40px; border-radius: 30px"
+                   @drop="onDrop($event, 1)"
+                   @dragover.prevent
+                   @dragenter.prevent
+              >
+                <q-chip
+                  size="15px"
+                  color="deep-orange-3"
+                  v-for="item in items.filter(x => x.categoryId === 1)"
+                  :key="item.id"
+                  style="min-width: 100px"
+                  @dragstart="onDragStart($event, item)"
+                  draggable="true"
+                >
+                  {{ item.title }}
+                </q-chip>
+              </div>
+              <div class="col bg-red-6">f</div>
+              <div class="col bg-red-9">j</div>
+            </div>
+<!--            <q-chip-->
+<!--              size="20px"-->
+<!--              color="deep-orange-3"-->
+<!--              v-for="x in 1"-->
+<!--              :key="x"-->
+<!--              style="min-width: 100px; max-height: 32px"-->
+<!--            >-->
+<!--              <div @drop="onDrop($event, 1)"-->
+<!--                   style="min-width: 80px;"-->
+<!--                   @dragover.prevent-->
+<!--                   @dragenter.prevent-->
+<!--              >-->
+<!--                <q-chip-->
+<!--                  size="15px"-->
+<!--                  color="deep-orange-3"-->
+<!--                  v-for="item in items.filter(x => x.categoryId === 1)"-->
+<!--                  :key="item.id"-->
+<!--                  style="min-width: 100px"-->
+<!--                  @dragstart="onDragStart($event, item)"-->
+<!--                  draggable="true"-->
+<!--                >-->
+<!--                  {{ item.title }}-->
+<!--                </q-chip>-->
+<!--              </div>-->
+<!--            </q-chip>-->
           </div>
         </div>
       </div>
       <div class="row q-mt-xl">
-        <div class="col-12"
+        <div class="col-12 bg-blue-1"
+             style="min-height: 40px"
              @drop="onDrop($event, 0)"
+             @dragover.prevent
+             @dragenter.prevent
         >
           <q-chip
             size="15px"
@@ -35,11 +76,30 @@
             v-for="item in items.filter(x => x.categoryId === 0)"
             :key="`xs-${n}`"
             style="min-width: 100px"
-            @dragstart="onDragStart($event, 1)"
+            @dragstart="onDragStart($event, item)"
+            draggable="true"
           >
             {{ item.title }}
           </q-chip>
         </div>
+<!--        <div class="col-12 bg-red-1"-->
+<!--             style="min-height: 40px"-->
+<!--             @drop="onDrop($event, 1)"-->
+<!--             @dragover.prevent-->
+<!--             @dragenter.prevent-->
+<!--        >-->
+<!--          <q-chip-->
+<!--            size="15px"-->
+<!--            color="deep-orange-3"-->
+<!--            v-for="item in items.filter(x => x.categoryId === 1)"-->
+<!--            :key="item.id"-->
+<!--            style="min-width: 100px"-->
+<!--            @dragstart="onDragStart($event, item)"-->
+<!--            draggable="true"-->
+<!--          >-->
+<!--            {{ item.title }}-->
+<!--          </q-chip>-->
+<!--        </div>-->
       </div>
     </div>
 
@@ -53,17 +113,31 @@ export default defineComponent({
   name: 'TestPage',
   setup() {
     const items = ref([
-      { id: 0, title: 'Item A', categoryId: 0 },
+      { id: 0, title: 'Item A', categoryId: 1 },
       { id: 1, title: 'Item B', categoryId: 0 },
       { id: 2, title: 'Item C', categoryId: 0 },
+      { id: 3, title: 'Item D', categoryId: 1 },
+      { id: 4, title: 'Item E', categoryId: 0 },
+      { id: 5, title: 'Item F', categoryId: 0 },
     ])
     const categories = ref([
       { id: 0, title: 'main'},
       { id: 1, title: 'block'}
     ])
 
-    function onDragStart(e, item) {}
-    function onDrop(e, categoryId) {}
+    function onDragStart(event, item) {
+      event.dataTransfer.dropEffect = "move"
+      event.dataTransfer.effectAllowed = "move"
+      event.dataTransfer.setData('itemId', item.id.toString())
+    }
+    function onDrop(event, categoryId) {
+      const itemId = parseInt(event.dataTransfer.getData('itemId'))
+      items.value = items.value.map(x => {
+        if (x.id === itemId)
+          x.categoryId = categoryId
+        return x
+      })
+    }
 
     return {
       items,
