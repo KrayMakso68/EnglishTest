@@ -15,13 +15,30 @@
             <q-chip
               size="15px"
               color="deep-orange-3"
-              v-for="n in 3"
+              v-for="item in items.filter()"
               :key="`xs-${n}`"
               style="min-width: 100px"
+              @drop="onDrop($event, 1)"
             >
               gg
             </q-chip>
           </div>
+        </div>
+      </div>
+      <div class="row q-mt-xl">
+        <div class="col-12"
+             @drop="onDrop($event, 0)"
+        >
+          <q-chip
+            size="15px"
+            color="deep-orange-3"
+            v-for="item in items.filter(x => x.categoryId === 0)"
+            :key="`xs-${n}`"
+            style="min-width: 100px"
+            @dragstart="onDragStart($event, 1)"
+          >
+            {{ item.title }}
+          </q-chip>
         </div>
       </div>
     </div>
@@ -31,8 +48,30 @@
 
 <script>
 import { defineComponent } from 'vue'
+import { ref } from 'vue'
 export default defineComponent({
-  name: 'TestPage'
+  name: 'TestPage',
+  setup() {
+    const items = ref([
+      { id: 0, title: 'Item A', categoryId: 0 },
+      { id: 1, title: 'Item B', categoryId: 0 },
+      { id: 2, title: 'Item C', categoryId: 0 },
+    ])
+    const categories = ref([
+      { id: 0, title: 'main'},
+      { id: 1, title: 'block'}
+    ])
+
+    function onDragStart(e, item) {}
+    function onDrop(e, categoryId) {}
+
+    return {
+      items,
+      categories,
+      onDragStart,
+      onDrop
+    }
+  }
 });
 </script>
 
