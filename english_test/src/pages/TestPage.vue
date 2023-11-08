@@ -12,29 +12,28 @@
           <div class="q-ma-none text-h6 text-no-wrap">измерять величину тока</div>
         </div>
         <div class="col-6">
-          <div class="q-gutter-xs q-pt-xs">   <!-- контейнеры dropable -->
-            <div class="row">
-              <div class="col bg-deep-orange-3"
-                   style="min-height: 40px; border-radius: 30px"
-                   @drop="onDrop($event, 1)"
-                   @dragover.prevent
-                   @dragenter.prevent
+          <div class="row q-gutter-xs">    <!-- контейнеры dropable -->
+            <div class="col bg-deep-orange-3 rowItemBox items-center"
+                 v-for="n in [1,2,3]"
+                 @drop="onDrop($event, n)"
+                 @dragover.prevent
+                 @dragenter.prevent
+            >
+              <q-chip
+                size="15px"
+                class="chipStyle "
+                color="deep-orange-3"
+                v-for="item in items.filter(x => x.categoryId === n)"
+                :key="item.id"
+                @dragstart="onDragStart($event, item)"
+                draggable="true"
               >
-                <q-chip
-                  size="15px"
-                  color="deep-orange-3"
-                  v-for="item in items.filter(x => x.categoryId === 1)"
-                  :key="item.id"
-                  style="min-width: 100px"
-                  @dragstart="onDragStart($event, item)"
-                  draggable="true"
-                >
+                <div class="q-mx-auto">
                   {{ item.title }}
-                </q-chip>
-              </div>
-              <div class="col bg-red-6">f</div>
-              <div class="col bg-red-9">j</div>
+                </div>
+              </q-chip>
             </div>
+          </div>
 <!--            <q-chip-->
 <!--              size="20px"-->
 <!--              color="deep-orange-3"-->
@@ -60,7 +59,6 @@
 <!--                </q-chip>-->
 <!--              </div>-->
 <!--            </q-chip>-->
-          </div>
         </div>
       </div>
       <div class="row q-mt-xl">
@@ -71,15 +69,18 @@
              @dragenter.prevent
         >
           <q-chip
+            square
             size="15px"
+            class="chipStyle"
             color="deep-orange-3"
             v-for="item in items.filter(x => x.categoryId === 0)"
             :key="`xs-${n}`"
-            style="min-width: 100px"
             @dragstart="onDragStart($event, item)"
             draggable="true"
           >
-            {{ item.title }}
+            <div class="q-mx-auto">
+              {{ item.title }}
+            </div>
           </q-chip>
         </div>
 <!--        <div class="col-12 bg-red-1"-->
@@ -117,7 +118,7 @@ export default defineComponent({
       { id: 1, title: 'Item B', categoryId: 0 },
       { id: 2, title: 'Item C', categoryId: 0 },
       { id: 3, title: 'Item D', categoryId: 1 },
-      { id: 4, title: 'Item E', categoryId: 0 },
+      { id: 4, title: 'Item Effffffdddddd', categoryId: 0 },
       { id: 5, title: 'Item F', categoryId: 0 },
     ])
     const categories = ref([
@@ -150,5 +151,12 @@ export default defineComponent({
 </script>
 
 <style lang="scss" scoped>
-
+.rowItemBox {
+  min-height: 40px;
+  border-radius: 30px;
+}
+.chipStyle {
+  margin-top: 5px;
+  min-width: 100px;
+}
 </style>
