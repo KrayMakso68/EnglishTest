@@ -3,23 +3,23 @@
     <!--    {{ $store.state.moduleTest.likes }}-->
     <div class="col-xs-12 col-sm-11 col-md-10 col-lg-8">
       <div class="column justify-between"
-           style="min-height: 40%;"
+           style="min-height: 70%;"
       >
         <div class="col">
           <div
-          class="row justify-between text-center bg-light-green-2 shadow-1 no-wrap"
+          class="row justify-between text-center bg-light-green-2 shadow-2 no-wrap q-mb-xs"
           style="border-radius: 6px; padding-top: 2px"
           v-for="n in 1"
-          :key="`xxx-${n}`"
+          :key="`row-${n}`"
         >
-          <div class="col-4">
-            <div class="q-ma-none text-h6 text-no-wrap ">измерять величину тока</div>
+          <div class="col-4 q-mt-xs">
+            <div class="text-h6 text-no-wrap q-mb-xs">измерять величину тока</div>
           </div>
           <div class="col-7">
             <div class="row q-gutter-xs no-wrap">    <!-- контейнеры dropable -->
               <div class="col bg-deep-orange-3 rowItemBox items-center"
                    v-for="n in [1,2,3]"
-                   @drop="onDrop($event, n)"
+                   @drop="onDropSingle($event, n)"
                    @dragover.prevent
                    @dragenter.prevent
               >
@@ -64,24 +64,6 @@
               </div>
             </q-chip>
           </div>
-          <!--        <div class="col-12 bg-red-1"-->
-          <!--             style="min-height: 40px"-->
-          <!--             @drop="onDrop($event, 1)"-->
-          <!--             @dragover.prevent-->
-          <!--             @dragenter.prevent-->
-          <!--        >-->
-          <!--          <q-chip-->
-          <!--            size="15px"-->
-          <!--            color="deep-orange-3"-->
-          <!--            v-for="item in items.filter(x => x.categoryId === 1)"-->
-          <!--            :key="item.id"-->
-          <!--            style="min-width: 100px"-->
-          <!--            @dragstart="onDragStart($event, item)"-->
-          <!--            draggable="true"-->
-          <!--          >-->
-          <!--            {{ item.title }}-->
-          <!--          </q-chip>-->
-          <!--        </div>-->
         </div>
       </div>
     </div>
@@ -92,17 +74,12 @@
 <script>
 import { defineComponent } from 'vue'
 import { ref } from 'vue'
+import {useStore} from "vuex";
 export default defineComponent({
   name: 'TestPage',
   setup() {
-    const items = ref([
-      { id: 0, title: 'Item A', categoryId: 1 },
-      { id: 1, title: 'Item B', categoryId: 0 },
-      { id: 2, title: 'Item C', categoryId: 0 },
-      { id: 3, title: 'Item D', categoryId: 1 },
-      { id: 4, title: 'semiconductor', categoryId: 0 },
-      { id: 5, title: 'Item F', categoryId: 0 },
-    ])
+    const $store = useStore();
+    const items = ref($store.state.moduleTest.items)
     const categories = ref([
       { id: 0, title: 'main'},
       { id: 1, title: 'block'}
@@ -121,12 +98,29 @@ export default defineComponent({
         return x
       })
     }
+    function onDropSingle(event, categoryId) {
+      const itemId = parseInt(event.dataTransfer.getData('itemId'))
+      let count = 0;
+      items.value.forEach((item) => {
+        if (item.categoryId === categoryId) {
+          count++
+        }
+      })
+      if (!count) {
+        items.value = items.value.map(x => {
+        if (x.id === itemId)
+          x.categoryId = categoryId
+        return x
+      })
+      }
+    }
 
     return {
       items,
       categories,
       onDragStart,
-      onDrop
+      onDrop,
+      onDropSingle
     }
   }
 });
