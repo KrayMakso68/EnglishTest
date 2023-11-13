@@ -1,6 +1,5 @@
 <template>
   <q-page class="row justify-center q-pt-lg">
-    <!--    {{ $store.state.moduleTest.likes }}-->
     <div class="col-xs-12 col-sm-11 col-md-10 col-lg-8">
       <div class="column justify-between"
            style="min-height: 70%;"
@@ -72,14 +71,38 @@
 </template>
 
 <script>
-import { defineComponent } from 'vue'
+import {computed, defineComponent} from 'vue'
 import { ref } from 'vue'
 import {useStore} from "vuex";
 export default defineComponent({
   name: 'TestPage',
   setup() {
-    const $store = useStore();
-    const items = ref($store.state.moduleTest.items)
+    // const $store = useStore();
+    //
+    //  // пример как использовать геттер в виде computed свойста
+    // const getAllItems = computed(() => $store.getters['testModule/getItems'])
+    //
+    // // пример как изменять состояние стора
+    // const addItemToList = (item) => {
+    //   $store.commit('testModule/addItem', item)
+    // }
+    //
+    // // добавил вызов для теста
+    // addItemToList({ id: 7, title: 'New Item 12312312', categoryId: 0 })
+
+
+    const items = ref([
+      { id: 0, title: 'Item A', categoryId: 1 },
+      { id: 1, title: 'Item B', categoryId: 0 },
+      { id: 2, title: 'Item C', categoryId: 0 },
+      { id: 3, title: 'Item D', categoryId: 0 },
+      { id: 4, title: 'semiconductor', categoryId: 0 },
+      { id: 5, title: 'Item F', categoryId: 0 },
+      { id: 6, title: 'Item A', categoryId: 0 },
+      { id: 7, title: 'Item B', categoryId: 0 },
+      { id: 8, title: 'Item C', categoryId: 0 },
+      { id: 9, title: 'Item D', categoryId: 0 },
+    ])
     const categories = ref([
       { id: 0, title: 'main'},
       { id: 1, title: 'block'}

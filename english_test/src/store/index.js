@@ -1,17 +1,15 @@
-import { store } from 'quasar/wrappers'
-import { createStore } from 'vuex'
-import moduleTest from "src/store/test-questions"
+import {store} from 'quasar/wrappers'
+import {createStore} from 'vuex'
+import testModule from "src/store/test-module"
 
 export default store(function (/* { ssrContext } */) {
-  const Store = createStore({
+  return createStore({
     modules: {
-      moduleTest
+      testModule
     },
 
     // enable strict mode (adds overhead!)
     // for dev mode and --debug builds only
     strict: process.env.DEBUGGING
   })
-
-  return Store
 })
