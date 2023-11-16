@@ -26,13 +26,13 @@
                   size="15px"
                   class="chipStyle "
                   color="deep-orange-3"
-                  v-for="item in items.filter(x => x.categoryId === n)"
-                  :key="item.id"
-                  @dragstart="onDragStart($event, item)"
+                  v-for="word in words.filter(x => x.categoryId === n)"
+                  :key="word.id"
+                  @dragstart="onDragStart($event, word)"
                   draggable="true"
                 >
                   <div class="text-subtitle1 text-weight-bold q-mx-auto">
-                    {{ item.title }}
+                    {{ word.title }}
                   </div>
                 </q-chip>
               </div>
@@ -53,34 +53,35 @@
               size="15px"
               class="chipStyle"
               color="deep-orange-3"
-              v-for="item in items.filter(x => x.categoryId === 0)"
-              :key="`xs-${n}`"
-              @dragstart="onDragStart($event, item)"
+              v-for="word in words.filter(x => x.categoryId === 0)"
+              :key="`xs-${word.id}`"
+              @dragstart="onDragStart($event, word)"
               draggable="true"
             >
               <div class="text-subtitle1 text-weight-bold q-mx-auto">
-                {{ item.title }}
+                {{ word.title }}
               </div>
             </q-chip>
           </div>
         </div>
       </div>
     </div>
-
   </q-page>
 </template>
 
 <script>
 import {computed, defineComponent} from 'vue'
 import { ref } from 'vue'
-import {useStore} from "vuex";
+import {mapState, useStore} from "vuex";
 export default defineComponent({
   name: 'TestPage',
   setup() {
-    // const $store = useStore();
-    //
+    const $store = useStore();
+    $store.commit('testModule/setTestCount')
+    $store.commit('testModule/setNowTestVariant')
+
     //  // пример как использовать геттер в виде computed свойста
-    // const getAllItems = computed(() => $store.getters['testModule/getItems'])
+    //const getAllItems = computed(() => $store.getters['testModule/getItems'])
     //
     // // пример как изменять состояние стора
     // const addItemToList = (item) => {
@@ -91,60 +92,46 @@ export default defineComponent({
     // addItemToList({ id: 7, title: 'New Item 12312312', categoryId: 0 })
 
 
-    const items = ref([
-      { id: 0, title: 'Item A', categoryId: 1 },
-      { id: 1, title: 'Item B', categoryId: 0 },
-      { id: 2, title: 'Item C', categoryId: 0 },
-      { id: 3, title: 'Item D', categoryId: 0 },
-      { id: 4, title: 'semiconductor', categoryId: 0 },
-      { id: 5, title: 'Item F', categoryId: 0 },
-      { id: 6, title: 'Item A', categoryId: 0 },
-      { id: 7, title: 'Item B', categoryId: 0 },
-      { id: 8, title: 'Item C', categoryId: 0 },
-      { id: 9, title: 'Item D', categoryId: 0 },
-    ])
-    const categories = ref([
-      { id: 0, title: 'main'},
-      { id: 1, title: 'block'}
-    ])
+    const words = ref(computed(() => $store.getters['testModule/getWords']))
+    // const categories = ref([
+    //   { id: 0, title: 'main'},
+    //   { id: 1, title: 'block'}
+    // ])
 
-    function onDragStart(event, item) {
+    function onDragStart(event, word) {
       event.dataTransfer.dropEffect = "move"
       event.dataTransfer.effectAllowed = "move"
-      event.dataTransfer.setData('itemId', item.id.toString())
+      event.dataTransfer.setData('wordId', word.id.toString())
     }
     function onDrop(event, categoryId) {
-      const itemId = parseInt(event.dataTransfer.getData('itemId'))
-      items.value = items.value.map(x => {
-        if (x.id === itemId)
-          x.categoryId = categoryId
-        return x
-      })
+      const wordId = parseInt(event.dataTransfer.getData('wordId'))
+      $store.commit('testModule/updateCatIDinWords', {wordId, categoryId})
     }
     function onDropSingle(event, categoryId) {
-      const itemId = parseInt(event.dataTransfer.getData('itemId'))
+      const wordId = parseInt(event.dataTransfer.getData('wordId'))
       let count = 0;
-      items.value.forEach((item) => {
-        if (item.categoryId === categoryId) {
+      words.value.forEach((word) => {
+        if (word.categoryId === categoryId) {
           count++
         }
       })
       if (!count) {
-        items.value = items.value.map(x => {
-        if (x.id === itemId)
-          x.categoryId = categoryId
-        return x
-      })
+        $store.commit('testModule/updateCatIDinWords', {wordId, categoryId})
       }
     }
 
     return {
-      items,
-      categories,
+      words,
+      // categories,
       onDragStart,
       onDrop,
-      onDropSingle
+      onDropSingle,
     }
+  },
+  computed: {
+    // ...mapState({
+    //   items: state => state.testModule.items
+    // })
   }
 });
 </script>
