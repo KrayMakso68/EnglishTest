@@ -1,6 +1,6 @@
 <template>
   <q-page class="row justify-center q-pt-lg">
-    <div class="col-xs-12 col-sm-11 col-md-10 col-lg-8">
+    <div class="col-xs-12 col-sm-11 col-md-10 col-lg-10">
       <div class="column justify-between"
            style="min-height: 70%;"
       >
@@ -8,13 +8,13 @@
           <div
           class="row justify-between text-center bg-light-green-2 shadow-2 no-wrap q-mb-xs"
           style="border-radius: 6px; padding-top: 2px"
-          v-for="n in 1"
-          :key="`row-${n}`"
+          v-for="phrase in phrases"
+          :key="`row-${phrase.number}`"
         >
           <div class="col-4 q-mt-xs">
-            <div class="text-h6 text-no-wrap q-mb-xs">измерять величину тока</div>
+            <div class="text-subtitle1 q-mb-xs">{{ phrase.title }}</div>
           </div>
-          <div class="col-7">
+          <div class="col-7 self-center">
             <div class="row q-gutter-xs no-wrap">    <!-- контейнеры dropable -->
               <div class="col bg-deep-orange-3 rowItemBox items-center"
                    v-for="n in [1,2,3]"
@@ -26,7 +26,7 @@
                   size="15px"
                   class="chipStyle "
                   color="deep-orange-3"
-                  v-for="word in words.filter(x => x.categoryId === n)"
+                  v-for="word in words.filter(x => x.containerId === n)"
                   :key="word.id"
                   @dragstart="onDragStart($event, word)"
                   draggable="true"
@@ -53,7 +53,7 @@
               size="15px"
               class="chipStyle"
               color="deep-orange-3"
-              v-for="word in words.filter(x => x.categoryId === 0)"
+              v-for="word in words.filter(x => x.containerId === 0)"
               :key="`xs-${word.id}`"
               @dragstart="onDragStart($event, word)"
               draggable="true"
@@ -93,6 +93,7 @@ export default defineComponent({
 
 
     const words = ref(computed(() => $store.getters['testModule/getWords']))
+    const phrases = $store.getters["testModule/getPhrases"]
     // const categories = ref([
     //   { id: 0, title: 'main'},
     //   { id: 1, title: 'block'}
@@ -103,25 +104,26 @@ export default defineComponent({
       event.dataTransfer.effectAllowed = "move"
       event.dataTransfer.setData('wordId', word.id.toString())
     }
-    function onDrop(event, categoryId) {
+    function onDrop(event, containerId) {
       const wordId = parseInt(event.dataTransfer.getData('wordId'))
-      $store.commit('testModule/updateCatIDinWords', {wordId, categoryId})
+      $store.commit('testModule/updateCatIDinWords', {wordId, containerId})
     }
-    function onDropSingle(event, categoryId) {
+    function onDropSingle(event, containerId) {
       const wordId = parseInt(event.dataTransfer.getData('wordId'))
       let count = 0;
       words.value.forEach((word) => {
-        if (word.categoryId === categoryId) {
+        if (word.categoryId === containerId) {
           count++
         }
       })
       if (!count) {
-        $store.commit('testModule/updateCatIDinWords', {wordId, categoryId})
+        $store.commit('testModule/updateCatIDinWords', {wordId, containerId})
       }
     }
 
     return {
       words,
+      phrases,
       // categories,
       onDragStart,
       onDrop,
@@ -129,9 +131,7 @@ export default defineComponent({
     }
   },
   computed: {
-    // ...mapState({
-    //   items: state => state.testModule.items
-    // })
+
   }
 });
 </script>
