@@ -1,17 +1,5 @@
 ﻿const testModule = {
   state: () => ({
-    words: [
-       { id: 0, title: 'Item A', categoryId: 1 },
-       { id: 1, title: 'Item B', categoryId: 0 },
-       { id: 2, title: 'Item C', categoryId: 0 },
-       { id: 3, title: 'Item D', categoryId: 0 },
-       { id: 4, title: 'semiconductor', categoryId: 0 },
-       { id: 5, title: 'Item F', categoryId: 0 },
-       { id: 6, title: 'Item A', categoryId: 0 },
-       { id: 7, title: 'Item B', categoryId: 0 },
-       { id: 8, title: 'Item C', categoryId: 0 },
-       { id: 9, title: 'Item D', categoryId: 0 },
-    ],
     testCount: null,
     testNow: {},
     testVariants: [
@@ -27,6 +15,18 @@
           { id: 7, title: 'Item B', containerId: 0 },
           { id: 8, title: 'Item C', containerId: 0 },
           { id: 9, title: 'Item D', containerId: 0 },
+        ],
+        phrases: [
+          {number: 1, title: 'измерять величину тока'},
+          {number: 2, title: 'быть следствием повреждения кабеля'},
+          {number: 3, title: 'осуществлять легирование вещества'},
+          {number: 4, title: 'применить свойство проводника'},
+          {number: 5, title: 'изменять заряд положительно заряженной частицы'},
+          {number: 6, title: 'распределять примесь диэлектрика'},
+          {number: 7, title: 'вызывать движение отрицательно заряженной частицы'},
+          {number: 8, title: 'сохранять удельную проводимость полупроводника'},
+          {number: 9, title: 'уменьшать потерю тепла'},
+          {number: 10, title: 'увеличивать напряжение в цепи'},
         ],
         answers: [
           { question: 1, answers: { cont1: 1, cont2: 2, cont: 3 } },
@@ -45,13 +45,10 @@
     ],
   }),
   mutations: {
-    // addItem(state, item) {
-    //   state.items.push(item)
-    // },
     updateCatIDinWords(state, data) {
-      state.words = [...state.words].map(x => {
+      state.testNow.words = [...state.testNow.words].map(x => {
         if (x.id === data.wordId)
-          x.categoryId = data.categoryId
+          x.containerId = data.containerId
         return x
       })
     },
@@ -64,7 +61,10 @@
   },
   getters: {
     getWords(state) {
-      return state.words
+      return state.testNow.words
+    },
+    getPhrases(state) {
+      return state.testNow.phrases
     }
   },
   actions: {
