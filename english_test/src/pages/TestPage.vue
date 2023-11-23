@@ -12,13 +12,13 @@
           :key="`row-${phrase.number}`"
         >
           <div class="col-4 q-mt-xs">
-            <div class="text-subtitle1 q-mb-xs">{{ phrase.title }}</div>
+            <div class="text-subtitle1 text-weight-medium q-mb-xs">{{ phrase.title }}</div>
           </div>
           <div class="col-7 self-center">
             <div class="row q-gutter-xs no-wrap">    <!-- контейнеры dropable -->
               <div class="col bg-deep-orange-3 rowItemBox items-center"
                    v-for="n in [1,2,3]"
-                   @drop="onDropSingle($event, n)"
+                   @drop="onDropSingle($event, Number(`${phrase.number}`+String(n)), phrase.number, n)"
                    @dragover.prevent
                    @dragenter.prevent
               >
@@ -26,7 +26,7 @@
                   size="15px"
                   class="chipStyle "
                   color="deep-orange-3"
-                  v-for="word in words.filter(x => x.containerId === n)"
+                  v-for="word in words.filter(x => x.containerId === Number(`${phrase.number}`+String(n)) )"
                   :key="word.id"
                   @dragstart="onDragStart($event, word)"
                   draggable="true"
@@ -108,16 +108,17 @@ export default defineComponent({
       const wordId = parseInt(event.dataTransfer.getData('wordId'))
       $store.commit('testModule/updateCatIDinWords', {wordId, containerId})
     }
-    function onDropSingle(event, containerId) {
+    function onDropSingle(event, containerId, question, container) {
       const wordId = parseInt(event.dataTransfer.getData('wordId'))
       let count = 0;
       words.value.forEach((word) => {
-        if (word.categoryId === containerId) {
+        if (word.containerId === containerId) {
           count++
         }
       })
       if (!count) {
         $store.commit('testModule/updateCatIDinWords', {wordId, containerId})
+        $store.commit('testModule/setAnswerNow', {containerId, question, container})
       }
     }
 
