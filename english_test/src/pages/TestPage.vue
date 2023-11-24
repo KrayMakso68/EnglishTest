@@ -1,20 +1,17 @@
 <template>
-  <q-page class="row justify-center q-pt-lg">
-    <div class="col-xs-12 col-sm-11 col-md-10 col-lg-10">
-      <div class="column justify-between"
-           style="min-height: 70%;"
-      >
-        <div class="col">
-          <div
+  <q-page class="row justify-center q-pt-sm-none q-pt-md-md q-pt-lg-lg q-pt-xl-xl">
+    <div class="col-sm-12 col-md-11 col-lg-10 q-pt-sm-none q-pt-md-md q-pt-lg-lg q-pt-xl-xl">
+      <div class="col">
+        <div
           class="row justify-between text-center bg-light-green-2 shadow-2 no-wrap q-mb-xs"
           style="border-radius: 6px; padding-top: 2px"
           v-for="phrase in phrases"
           :key="`row-${phrase.number}`"
         >
-          <div class="col-4 q-mt-xs">
+          <div class="col-6 q-mt-xs">
             <div class="text-subtitle1 text-weight-medium q-mb-xs">{{ phrase.title }}</div>
           </div>
-          <div class="col-7 self-center">
+          <div class="col-6 self-center">
             <div class="row q-gutter-xs no-wrap">    <!-- контейнеры dropable -->
               <div class="col bg-deep-orange-3 rowItemBox items-center"
                    v-for="n in [1,2,3]"
@@ -39,33 +36,33 @@
             </div>
           </div>
         </div>
-        </div>
+      </div>
 
-        <div class="row q-mt-xl">
-          <div class="col-12 bg-blue-1"
-               style="min-height: 40px"
-               @drop="onDrop($event, 0)"
-               @dragover.prevent
-               @dragenter.prevent
-          >
-            <q-chip
-              square
-              size="15px"
-              class="chipStyle"
-              color="deep-orange-3"
-              v-for="word in words.filter(x => x.containerId === 0)"
-              :key="`xs-${word.id}`"
-              @dragstart="onDragStart($event, word)"
-              draggable="true"
-            >
-              <div class="text-subtitle1 text-weight-bold q-mx-auto">
-                {{ word.title }}
-              </div>
-            </q-chip>
+
+      <div class="col bg-blue-1 q-mt-sm-sm q-mt-md-lg q-mt-lg-xl"
+           style="min-height: 120px; border-radius: 5px"
+           @drop="onDrop($event, 0)"
+           @dragover.prevent
+           @dragenter.prevent
+      >
+        <q-chip
+          square
+          size="15px"
+          class="chipStyle"
+          color="deep-orange-3"
+          v-for="word in words.filter(x => x.containerId === 0)"
+          :key="`xs-${word.id}`"
+          @dragstart="onDragStart($event, word)"
+          draggable="true"
+        >
+          <div class="text-subtitle1 text-weight-bold q-mx-auto">
+            {{ word.title }}
           </div>
-        </div>
+        </q-chip>
       </div>
     </div>
+
+
   </q-page>
 </template>
 
@@ -94,10 +91,6 @@ export default defineComponent({
 
     const words = ref(computed(() => $store.getters['testModule/getWords']))
     const phrases = $store.getters["testModule/getPhrases"]
-    // const categories = ref([
-    //   { id: 0, title: 'main'},
-    //   { id: 1, title: 'block'}
-    // ])
 
     function onDragStart(event, word) {
       event.dataTransfer.dropEffect = "move"
@@ -118,14 +111,18 @@ export default defineComponent({
       })
       if (!count) {
         $store.commit('testModule/updateCatIDinWords', {wordId, containerId})
-        $store.commit('testModule/setAnswerNow', {containerId, question, container})
+        $store.commit('testModule/setAnswerNow', {wordId, question, container})
       }
     }
+    // function setAnswerInNull(question, container) {
+    //   $store.commit('testModule/setAnswerInNull', {question, container})
+    // }
 
     return {
       words,
       phrases,
       // categories,
+      setAnswerInNull,
       onDragStart,
       onDrop,
       onDropSingle,

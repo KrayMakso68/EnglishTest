@@ -1,16 +1,16 @@
 ﻿const testModule = {
   state: () => ({
     answersNow: [
-      { question: 1, answers: { cont1: null, cont2: null, cont: null } },
-      { question: 2, answers: { cont1: null, cont2: null, cont: null } },
-      { question: 3, answers: { cont1: null, cont2: null, cont: null } },
-      { question: 4, answers: { cont1: null, cont2: null, cont: null } },
-      { question: 5, answers: { cont1: null, cont2: null, cont: null } },
-      { question: 6, answers: { cont1: null, cont2: null, cont: null } },
-      { question: 7, answers: { cont1: null, cont2: null, cont: null } },
-      { question: 8, answers: { cont1: null, cont2: null, cont: null } },
-      { question: 9, answers: { cont1: null, cont2: null, cont: null } },
-      { question: 10, answers: { cont1: null, cont2: null, cont: null } }
+      { question: 1, answers: [null, null, null] },
+      { question: 2, answers: [null, null, null] },
+      { question: 3, answers: [null, null, null] },
+      { question: 4, answers: [null, null, null] },
+      { question: 5, answers: [null, null, null] },
+      { question: 6, answers: [null, null, null] },
+      { question: 7, answers: [null, null, null] },
+      { question: 8, answers: [null, null, null] },
+      { question: 9, answers: [null, null, null] },
+      { question: 10, answers: [null, null, null] }
     ],
     testCount: null,
     testNow: {},
@@ -91,8 +91,11 @@
       state.testNow = state.testVariants[Math.floor(Math.random() * state.testCount)]
     },
     setAnswerNow(state, data) {
-      // state.answersNow.
-    }
+      state.answersNow[data.question - 1].answers[data.container - 1] = data.wordId
+    },
+    // setAnswerInNull(state, data) {
+    //   state.answersNow[data.question - 1].answers[data.container - 1] = null
+    // }
   },
   getters: {
     getWords(state) {
