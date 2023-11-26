@@ -13,7 +13,7 @@
               </div>
             </q-card-section>
 
-            <q-card-section horizontal class="col-5 flex flex-center ">
+            <q-card-section class="col-6 flex flex-center ">
               <q-img
                 class="rounded-borders card-img"
                 src="src/assets/img-streamlinehq-team-brainstorming-work.svg"
@@ -24,7 +24,7 @@
           <q-separator />
 
           <q-card-actions>
-            <q-btn push to="test" color="indigo-6 full-width" class="q-mb-xl q-mt-xs">
+            <q-btn push to="training" color="indigo-6 full-width" class="q-mb-xl q-mt-xs">
               <div class="text-overline text-weight-bold">
                 Начать тренировку
               </div>
@@ -55,7 +55,7 @@
           <q-separator />
 
           <q-card-actions>
-            <q-btn push color="deep-orange-12 full-width" class="q-mb-xl q-mt-xs">
+            <q-btn push to="test" color="deep-orange-12 full-width" class="q-mb-xl q-mt-xs">
               <div class="text-overline text-weight-bold">
                 Начать тестирование
               </div>

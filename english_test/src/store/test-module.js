@@ -1,5 +1,6 @@
 ﻿const testModule = {
   state: () => ({
+    isTest: false,
     answersNow: [
       { question: 1, answers: [null, null, null] },
       { question: 2, answers: [null, null, null] },
@@ -12,8 +13,25 @@
       { question: 9, answers: [null, null, null] },
       { question: 10, answers: [null, null, null] }
     ],
-    testCount: null,
+    result: {
+      true: null,
+      false: null,
+      percents: null,
+      answersCheck: [
+        { question: 1, true: false, answers: [null, null, null] },
+        { question: 2, true: false, answers: [null, null, null] },
+        { question: 3, true: false, answers: [null, null, null] },
+        { question: 4, true: false, answers: [null, null, null] },
+        { question: 5, true: false, answers: [null, null, null] },
+        { question: 6, true: false, answers: [null, null, null] },
+        { question: 7, true: false, answers: [null, null, null] },
+        { question: 8, true: false, answers: [null, null, null] },
+        { question: 9, true: false, answers: [null, null, null] },
+        { question: 10, true: false, answers: [null, null, null] }
+      ],
+    },
     testNow: {},
+    testCount: null,
     testVariants: [
       {
         words: [
@@ -61,19 +79,18 @@
           {number: 10, title: 'увеличивать напряжение в цепи'},
         ],
         rightAnswers: [
-          { question: 1, answers: { cont1: 18, cont2: 8, cont: 14 } },
-          { question: 2, answers: { cont1: 29, cont2: 6, cont: 23 } },
-          { question: 3, answers: { cont1: 13, cont2: 2, cont: 21 } },
-          { question: 4, answers: { cont1: 1, cont2: 12, cont: 28 } },
-          { question: 5, answers: { cont1: 16, cont2: 20, cont: 19 } },
-          { question: 6, answers: { cont1: 22, cont2: 11, cont: 26 } },
-          { question: 7, answers: { cont1: 25, cont2: 24, cont: 10 } },
-          { question: 8, answers: { cont1: 7, cont2: 17, cont: 5 } },
-          { question: 9, answers: { cont1: 4, cont2: 9, cont: 3 } },
-          { question: 10, answers: { cont1: 0, cont2: 15, cont: 27 } }
+          {question: 1, answers: [18, 8, 14]},
+          {question: 2, answers: [29, 6, 23]},
+          {question: 3, answers: [13, 2, 21]},
+          {question: 4, answers: [1, 12, 28]},
+          {question: 5, answers: [16, 20, 19]},
+          {question: 6, answers: [22, 11, 26]},
+          {question: 7, answers: [25, 24, 10]},
+          {question: 8, answers: [7, 17, 5]},
+          {question: 9, answers: [4, 9, 3]},
+          {question: 10, answers: [0, 15, 27]}
         ]
       },
-
     ],
   }),
   mutations: {
@@ -93,9 +110,35 @@
     setAnswerNow(state, data) {
       state.answersNow[data.question - 1].answers[data.container - 1] = data.wordId
     },
-    // setAnswerInNull(state, data) {
-    //   state.answersNow[data.question - 1].answers[data.container - 1] = null
-    // }
+    setAnswerInNull(state, data) {
+      state.answersNow[data.question - 1].answers[data.container - 1] = null
+    },
+    setIsTestFlag(state) {
+      state.isTest = true
+    },
+    setResult(state) {
+      let trueCount = 0
+      state.answersNow.forEach((question, num) => {
+        let count = 0
+        question.answers.forEach((el, i) => {
+          const rightAns = state.testNow.rightAnswers //!!!!
+          console.log(rightAns)
+          if (el === rightAns) {
+            state.result.answersCheck[num].answers[i] = true
+            count++
+          }
+          else
+            state.result.answersCheck[num].answers[i] = false
+        })
+        if (count === 3) {
+          state.result.answersCheck[num].true = true
+          trueCount++
+        }
+      })
+      state.result.true = trueCount
+      state.result.false = 10 - trueCount
+      state.result.percents = Math.round(100 / 10 * trueCount)
+    }
   },
   getters: {
     getWords(state) {
