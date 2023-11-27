@@ -121,8 +121,7 @@
       state.answersNow.forEach((question, num) => {
         let count = 0
         question.answers.forEach((el, i) => {
-          const rightAns = state.testNow.rightAnswers //!!!!
-          console.log(rightAns)
+          const rightAns = state.testNow.rightAnswers[num].answers[i]
           if (el === rightAns) {
             state.result.answersCheck[num].answers[i] = true
             count++
@@ -138,7 +137,42 @@
       state.result.true = trueCount
       state.result.false = 10 - trueCount
       state.result.percents = Math.round(100 / 10 * trueCount)
+    },
+    resetTest(state) {
+      state.isTest = false
+      state.answersNow = [
+        { question: 1, answers: [null, null, null] },
+        { question: 2, answers: [null, null, null] },
+        { question: 3, answers: [null, null, null] },
+        { question: 4, answers: [null, null, null] },
+        { question: 5, answers: [null, null, null] },
+        { question: 6, answers: [null, null, null] },
+        { question: 7, answers: [null, null, null] },
+        { question: 8, answers: [null, null, null] },
+        { question: 9, answers: [null, null, null] },
+        { question: 10, answers: [null, null, null] }
+      ]
+      state.result = {
+        true: null,
+        false: null,
+        percents: null,
+        answersCheck: [
+          { question: 1, true: false, answers: [null, null, null] },
+          { question: 2, true: false, answers: [null, null, null] },
+          { question: 3, true: false, answers: [null, null, null] },
+          { question: 4, true: false, answers: [null, null, null] },
+          { question: 5, true: false, answers: [null, null, null] },
+          { question: 6, true: false, answers: [null, null, null] },
+          { question: 7, true: false, answers: [null, null, null] },
+          { question: 8, true: false, answers: [null, null, null] },
+          { question: 9, true: false, answers: [null, null, null] },
+          { question: 10, true: false, answers: [null, null, null] }
+        ],
+      }
+      state.testNow = {}
     }
+
+
   },
   getters: {
     getWords(state) {
@@ -146,6 +180,15 @@
     },
     getPhrases(state) {
       return state.testNow.phrases
+    },
+    getResultTrue(state) {
+      return state.result.true
+    },
+    getResultFalse(state) {
+      return state.result.false
+    },
+    getResultPercents(state) {
+      return state.result.percents
     }
   },
   actions: {

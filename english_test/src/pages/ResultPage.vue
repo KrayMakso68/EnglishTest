@@ -11,7 +11,7 @@
           <q-card-section class="col-6 q-pt-md">
             <div class="text-h5 text-weight-bold q-mt-sm q-mb-xs">Результат:</div>
             <div class="text-h2 text-weight-bold text-green q-pt-lg">
-              88%
+              {{percents}}%
             </div>
           </q-card-section>
 
@@ -26,7 +26,7 @@
         <q-separator />
 
         <q-card-actions>
-          <q-btn to="/" class="text-weight-bold full-width" color="indigo-6" icon="home" label="На главную" />
+          <q-btn to="/" @click="resetTest" class="text-weight-bold full-width" color="indigo-6" icon="home" label="На главную" />
         </q-card-actions>
       </q-card>
     </div>
@@ -50,18 +50,28 @@ export default defineComponent({
   setup() {
     const $store = useStore();
     $store.commit('testModule/setResult')
+    const trueAns = $store.getters["testModule/getResultTrue"]
+    const falseAns = $store.getters["testModule/getResultFalse"]
+    const percents = $store.getters["testModule/getResultPercents"]
 
     const testData = {
       labels: ['Верно', 'Неверно'],
       datasets: [
         {
-          data: [70, 30],
-          backgroundColor: ['#0079AF', '#97B0C4'],
+          data: [trueAns, falseAns],
+          backgroundColor: ['#4ce854', '#de4e5d'],
         },
       ],
-    };
+    }
+    function resetTest() {
+      $store.commit('testModule/resetTest')
+    }
 
-    return { testData };
+    return {
+      testData,
+      percents,
+      resetTest
+    };
   },
 })
 </script>
