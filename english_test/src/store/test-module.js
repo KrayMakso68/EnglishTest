@@ -108,10 +108,10 @@
       state.testNow = state.testVariants[Math.floor(Math.random() * state.testCount)]
     },
     setAnswerNow(state, data) {
-      state.answersNow[data.question - 1].answers[data.container - 1] = data.wordId
+      state.answersNow.at(data.question - 1).answers[data.container - 1] = data.wordId
     },
     setAnswerInNull(state, data) {
-      state.answersNow[data.question - 1].answers[data.container - 1] = null
+      state.answersNow.at(data.question - 1).answers[data.container - 1] = null
     },
     setIsTestFlag(state) {
       state.isTest = true
@@ -121,13 +121,13 @@
       state.answersNow.forEach((question, num) => {
         let count = 0
         question.answers.forEach((el, i) => {
-          const rightAns = state.testNow.rightAnswers[num].answers[i]
+          const rightAns = state.testNow?.rightAnswers[num]?.answers[i]
           if (el === rightAns) {
-            state.result.answersCheck[num].answers[i] = true
+            state.result.answersCheck.at(num).answers[i] = true
             count++
           }
           else
-            state.result.answersCheck[num].answers[i] = false
+            state.result.answersCheck.at(num).answers[i] = false
         })
         if (count === 3) {
           state.result.answersCheck[num].true = true

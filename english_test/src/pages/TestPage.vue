@@ -39,8 +39,7 @@
           </div>
         </div>
 
-
-        <div class="col-12 q-gutter-sm items-center self-start bg-blue-1 "
+        <div class="col-12 q-gutter-sm items-center self-start bg-blue-1 q-mt-sm"
              style="min-height: 120px; border-radius: 5px"
              @drop="onDrop($event, 0)"
              @dragover.prevent
@@ -61,6 +60,7 @@
             </div>
           </q-chip>
         </div>
+
         <div class="col-12 self-end">
           <div class="row q-pb-sm text-no-wrap justify-between">
             <div class="col">
@@ -85,6 +85,7 @@
 import {computed, defineComponent} from 'vue'
 import { ref } from 'vue'
 import {useStore} from "vuex";
+import {useRouter} from "vue-router";
 export default defineComponent({
   name: 'TestPage',
   props: {
@@ -94,6 +95,7 @@ export default defineComponent({
   },
   setup(props) {
     const $store = useStore();
+    const router = useRouter()
 
     $store.commit('testModule/setTestCount')
     $store.commit('testModule/setNowTestVariant')
@@ -157,6 +159,7 @@ export default defineComponent({
           // останавливаем отсчёт
           clearInterval(timer.value);
           timerString.value = "_:__"
+          router.push({ path: 'result' })
         }
       }, 1000)
     }
@@ -170,7 +173,7 @@ export default defineComponent({
       startTimer,
       onDragStart,
       onDrop,
-      onDropSingle,
+      onDropSingle
     }
   },
   mounted() {
