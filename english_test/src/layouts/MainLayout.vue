@@ -66,12 +66,12 @@ const linksList = [
     title: 'About',
     caption: 'about program',
     icon: 'list',
-    link: ''
+    link: 'about'
   },
   {
-    title: 'Author',
-    caption: '',
-    icon: 'list',
+    title: 'Authors',
+    caption: 'about authors',
+    icon: 'stars',
     link: ''
   }
 ]

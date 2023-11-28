@@ -8,6 +8,7 @@ const routes = [
       { path: 'training', component: () => import('pages/TestPage.vue') },
       { path: 'test', component: () => import('pages/TestPage.vue'), props: { isTest: true } },
       { path: 'result', component: () => import('pages/ResultPage.vue') },
+      { path: 'about', component: () => import('pages/AboutPage.vue') },
     ]
   },
 
