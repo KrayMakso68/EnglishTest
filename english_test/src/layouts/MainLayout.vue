@@ -51,8 +51,9 @@
 </template>
 
 <script>
-import { defineComponent, ref } from 'vue'
+import {computed, defineComponent, ref} from 'vue'
 import EssentialLink from 'components/EssentialLink.vue'
+import {useStore} from "vuex";
 
 const linksList = [
   {
@@ -62,40 +63,16 @@ const linksList = [
     link: '/'
   },
   {
-    title: 'Test',
-    caption: 'test page',
+    title: 'About',
+    caption: 'about program',
     icon: 'list',
-    link: 'test'
+    link: ''
   },
   {
-    title: 'Discord Chat Channel',
-    caption: 'chat.quasar.dev',
-    icon: 'chat',
-    link: 'https://chat.quasar.dev'
-  },
-  {
-    title: 'Forum',
-    caption: 'forum.quasar.dev',
-    icon: 'record_voice_over',
-    link: 'https://forum.quasar.dev'
-  },
-  {
-    title: 'Twitter',
-    caption: '@quasarframework',
-    icon: 'rss_feed',
-    link: 'https://twitter.quasar.dev'
-  },
-  {
-    title: 'Facebook',
-    caption: '@QuasarFramework',
-    icon: 'public',
-    link: 'https://facebook.quasar.dev'
-  },
-  {
-    title: 'Quasar Awesome',
-    caption: 'Community Quasar projects',
-    icon: 'favorite',
-    link: 'https://awesome.quasar.dev'
+    title: 'Author',
+    caption: '',
+    icon: 'list',
+    link: ''
   }
 ]
 

@@ -64,7 +64,7 @@
         <div class="col-12 self-end">
           <div class="row q-pb-sm text-no-wrap justify-between">
             <div class="col">
-              <q-btn to="/" class="text-weight-bold" color="indigo-6" icon="home" label="На главную" />
+              <q-btn to="/" v-show="!isTest" @click="resetTest" class="text-weight-bold" color="indigo-6" icon="home" label="На главную" />
             </div>
             <div class="col">
               <div v-if="isTest" class="text-h4 text-weight-bold text-indigo-13 text-center">
@@ -101,8 +101,8 @@ export default defineComponent({
     $store.commit('testModule/setNowTestVariant')
     if (props.isTest)
       $store.commit('testModule/setIsTestFlag')
-
-    const words = ref(computed(() => $store.getters['testModule/getWords']))
+    //console.log($store.getters['testModule/getWords'])
+    const words = computed(() => $store.getters['testModule/getWords'])
     const phrases = $store.getters["testModule/getPhrases"]
     const currentTime = ref(5)  //время таймера в минутах
     const timer = ref()
@@ -156,12 +156,15 @@ export default defineComponent({
         timerString.value = min + ":" + sec;
 
         if (remain < 0) {
-          // останавливаем отсчёт
           clearInterval(timer.value);
           timerString.value = "_:__"
           router.push({ path: 'result' })
         }
       }, 1000)
+    }
+
+    function resetTest() {
+      $store.commit('testModule/resetTest')
     }
 
     return {
@@ -173,7 +176,8 @@ export default defineComponent({
       startTimer,
       onDragStart,
       onDrop,
-      onDropSingle
+      onDropSingle,
+      resetTest
     }
   },
   mounted() {

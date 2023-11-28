@@ -1,4 +1,6 @@
-﻿const testModule = {
+﻿import _ from 'lodash'
+
+const testModule = {
   state: () => ({
     isTest: false,
     answersNow: [
@@ -105,7 +107,7 @@
       state.testCount = state.testVariants.length
     },
     setNowTestVariant(state) {
-      state.testNow = state.testVariants[Math.floor(Math.random() * state.testCount)]
+      state.testNow = _.cloneDeep(state.testVariants[Math.floor(Math.random() * state.testCount)])
     },
     setAnswerNow(state, data) {
       state.answersNow.at(data.question - 1).answers[data.container - 1] = data.wordId
@@ -140,6 +142,7 @@
     },
     resetTest(state) {
       state.isTest = false
+      state.testNow = {}
       state.answersNow = [
         { question: 1, answers: [null, null, null] },
         { question: 2, answers: [null, null, null] },
@@ -169,7 +172,6 @@
           { question: 10, true: false, answers: [null, null, null] }
         ],
       }
-      state.testNow = {}
     }
 
 
