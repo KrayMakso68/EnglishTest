@@ -16,7 +16,7 @@
             <q-card-section class="col-6 flex flex-center ">
               <q-img
                 class="rounded-borders card-img"
-                src="src/assets/img-streamlinehq-team-brainstorming-work.svg"
+                src="../assets/img-streamlinehq-team-brainstorming-work.svg"
               />
             </q-card-section>
           </q-card-section>
@@ -47,7 +47,7 @@
             <q-card-section horizontal class="col-5 flex flex-center q-pa-sm">
               <q-img
                 class="rounded-borders card-img"
-                src="src/assets/streamlinehq-education-online-exams-tests-education-os.svg"
+                src="../assets/streamlinehq-education-online-exams-tests-education-os.svg"
               />
             </q-card-section>
           </q-card-section>

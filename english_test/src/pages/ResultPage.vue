@@ -18,7 +18,7 @@
           <q-card-section class="col-6 flex flex-center q-pa-none">
             <q-img
                 class="rounded-borders card-img"
-                src="src/assets/results.svg"
+                src="../assets/results.svg"
             />
           </q-card-section>
         </q-card-section>
