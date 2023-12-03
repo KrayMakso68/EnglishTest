@@ -12,9 +12,9 @@ function createWindow () {
    * Initial window options
    */
   mainWindow = new BrowserWindow({
-    icon: path.resolve(__dirname, 'icons/icon.png'), // tray icon
-    width: 1000,
-    height: 600,
+    minHeight: 800,
+    minWidth: 1200,
+    show: false,
     useContentSize: true,
     webPreferences: {
       contextIsolation: true,
@@ -25,6 +25,8 @@ function createWindow () {
 
   mainWindow.loadURL(process.env.APP_URL)
   mainWindow.setMenu(null);
+  mainWindow.maximize();
+  mainWindow.show();
 
   if (process.env.DEBUGGING) {
     // if on DEV or Production with debug enabled

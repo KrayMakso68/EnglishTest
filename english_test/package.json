@@ -1,15 +1,16 @@
 {
   "name": "english-test",
   "version": "0.0.1",
-  "description": "A Quasar Project",
-  "productName": "Quasar App",
+  "description": "English Test",
+  "productName": "English Test",
   "author": "maks68",
   "private": true,
   "scripts": {
     "test": "echo \"No test specified\" && exit 0",
     "dev": "quasar dev",
     "dev-electron": "quasar dev -m electron --devtools",
-    "build": "quasar build"
+    "build": "quasar build",
+    "build-electon": "quasar build -m electron"
   },
   "dependencies": {
     "@quasar/extras": "^1.16.4",
@@ -28,6 +29,7 @@
     "@vue/devtools": "^6.5.1",
     "autoprefixer": "^10.4.2",
     "electron": "^27.0.0",
+    "electron-builder": "^21.2.0",
     "electron-packager": "^17.1.2",
     "postcss": "^8.4.14"
   },

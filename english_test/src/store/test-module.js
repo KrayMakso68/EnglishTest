@@ -183,6 +183,19 @@ const testModule = {
     getPhrases(state) {
       return state.testNow.phrases
     },
+    getFalseQuestionsWithRightAnswers(state) {
+      let FalseQuestions = []
+      state.result.answersCheck.forEach(str => {
+        if(str.true === false) {
+          let question = {}
+          question.phrase = state.testNow.phrases[str.question - 1].title
+          question.nowAnswers = state.answersNow[str.question - 1].answers
+          question.rightAnswers = state.testNow.rightAnswers[str.question - 1].answers
+          FalseQuestions.push(question)
+        }
+      })
+      return FalseQuestions
+    },
     getResultTrue(state) {
       return state.result.true
     },

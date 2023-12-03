@@ -101,7 +101,6 @@ export default defineComponent({
     $store.commit('testModule/setNowTestVariant')
     if (props.isTest)
       $store.commit('testModule/setIsTestFlag')
-    //console.log($store.getters['testModule/getWords'])
     const words = computed(() => $store.getters['testModule/getWords'])
     const phrases = $store.getters["testModule/getPhrases"]
     const currentTime = ref(5)  //время таймера в минутах

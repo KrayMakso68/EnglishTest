@@ -9,6 +9,7 @@ const routes = [
       { path: 'test', component: () => import('pages/TestPage.vue'), props: { isTest: true } },
       { path: 'result', component: () => import('pages/ResultPage.vue') },
       { path: 'about', component: () => import('pages/AboutPage.vue') },
+      { path: 'authors', component: () => import('pages/Authors.vue') },
     ]
   },
 

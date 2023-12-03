@@ -72,7 +72,7 @@ const linksList = [
     title: 'Authors',
     caption: 'about authors',
     icon: 'stars',
-    link: ''
+    link: 'authors'
   }
 ]
 
