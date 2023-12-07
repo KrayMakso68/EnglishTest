@@ -9,7 +9,8 @@
       <q-card class="my-card" flat bordered>
         <q-card-section horizontal>
           <q-card-section class="col-6 q-pt-md">
-            <div class="text-h5 text-weight-bold q-mt-sm q-mb-xs">Результат:</div>
+            <div v-if="testFlag" class="text-h5 text-weight-bold q-mt-sm q-mb-xs">Результат теста:</div>
+            <div v-else class="text-h5 text-weight-bold q-mt-sm q-mb-xs">Результат тренировки:</div>
             <div class="text-h2 text-weight-bold text-green q-pt-lg">
               {{percents}}%
             </div>
@@ -104,6 +105,7 @@ export default defineComponent({
     const falseAns = $store.getters["testModule/getResultFalse"]
     const percents = $store.getters["testModule/getResultPercents"]
     const falseQuestions = $store.getters["testModule/getFalseQuestionsWithRightAnswers"]
+    const testFlag = $store.getters["testModule/getIsTestFlag"]
 
     const testData = {
       labels: ['Верно', 'Неверно'],
@@ -130,6 +132,7 @@ export default defineComponent({
       falseQuestions,
       testData,
       percents,
+      testFlag,
       resetTest,
       getWordTitleById
     };
