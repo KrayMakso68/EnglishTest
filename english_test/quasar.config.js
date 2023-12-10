@@ -193,7 +193,12 @@ module.exports = configure(function (/* ctx */) {
         appId: 'english-test',
         win: {
           icon: 'src-electron/icons/eng.ico',
-          target: 'nsis'
+          target: [
+            {
+              target: "nsis",
+              arch: ["x64"]
+            }
+          ]
         },
       }
     },

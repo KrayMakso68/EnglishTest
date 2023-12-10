@@ -437,7 +437,7 @@ const testModule = {
           {question: 6, answers: [12, 28, 6]},
           {question: 7, answers: [21, 8, 23]},
           {question: 8, answers: [2, 18, 24]},
-          {question: 9, answers: [7, 27, 11]},
+          {question: 9, answers: [7, 11, 27]},
           {question: 10, answers: [4, 13, 26]}
         ]
       },

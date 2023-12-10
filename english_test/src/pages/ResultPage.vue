@@ -5,7 +5,7 @@
         <DoughnutChart :chartData="testData"/>
       </div>
     </div>
-    <div class="col-5">
+    <div class="col-5 shadow-1">
       <q-card class="my-card" flat bordered>
         <q-card-section horizontal>
           <q-card-section class="col-6 q-pt-md">
@@ -38,12 +38,12 @@
 
               <q-card-section  class="q-pt-none">
                 <q-card v-for="que in falseQuestions"
-                        class="q-mt-md"
+                        class="q-mt-md bg-red-2"
                 >
                   <q-card-section class="text-center">
                     <div class="text-h5 text-weight-bold">{{que.phrase}}</div>
                     <q-separator />
-                    <div class="q-gutter-x-sm no-wrap">
+                    <div class="q-gutter-x-sm no-wrap q-mt-sm">
                       <q-chip size="lg"
                               color="red"
                               v-for="el in que.nowAnswers"

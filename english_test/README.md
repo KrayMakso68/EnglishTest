@@ -26,3 +26,8 @@ quasar dev -m electron --devtools
 ```bash
 quasar build
 ```
+
+### Build the app for production with using electron-builder
+```bash
+quasar build -m electron
+```

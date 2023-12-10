@@ -103,7 +103,7 @@ export default defineComponent({
       $store.commit('testModule/setIsTestFlag')
     const words = computed(() => $store.getters['testModule/getWords'])
     const phrases = $store.getters["testModule/getPhrases"]
-    const currentTime = ref(5)  //время таймера в минутах
+    const currentTime = ref(15)  //время таймера в минутах
     const timer = ref()
     const timerString = ref('_:__')
 
@@ -141,11 +141,15 @@ export default defineComponent({
         $store.commit('testModule/setAnswerInNull', {question: lastQuestion, container: lastContainer})
       }
     }
+    function setIntervalImmediately(func, interval) {
+      func()
+      return setInterval(func, interval)
+    }
     function startTimer() {
       let start_time = new Date();
       let stop_time = start_time.setMinutes(start_time.getMinutes() + currentTime.value);
 
-      this.timer = setInterval(() => {
+      this.timer = setIntervalImmediately(() => {
         let now = new Date().getTime();
         let remain = stop_time - now;
         let min = Math.floor( (remain % (1000 * 60 * 60)) / (1000 * 60) );
